@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: myATMapp
+  
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  atmProducerFn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: atmProducer/
+      Handler: handler.lambdaHandler
+      Runtime: nodejs12.x
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Resource: '*'
+            Action:
+              - events:PutEvents      
+
+  atmConsumerCase1Fn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: atmConsumer/
+      Handler: handler.case1Handler
+      Runtime: nodejs12.x
+
+  atmConsumerCase2Fn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: atmConsumer/
+      Handler: handler.case2Handler
+      Runtime: nodejs12.x
+      Events:
+        Trigger:
+          Type: CloudWatchEvent 
+          Properties:
+            Pattern:
+              source:
+                - custom.myATMapp
+              detail-type:
+                - transaction                
+              detail:
+                location:
+                  - "prefix": "NY-"
+
+  atmConsumerCase3Fn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: atmConsumer/
+      Handler: handler.case3Handler
+      Runtime: nodejs12.x
+      Events:
+        Trigger:
+          Type: CloudWatchEvent 
+          Properties:
+            Pattern:
+              source:
+                - custom.myATMapp
+              detail-type:
+                - transaction                
+              detail:
+                result:
+                  - "anything-but": "approved"
+
+  EventRuleCase1: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "Approved transactions"
+      EventPattern: 
+        source: 
+          - "custom.myATMapp"
+        detail-type:
+          - transaction   
+        detail: 
+          result: 
+            - "approved"
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: 
+            Fn::GetAtt: 
+              - "atmConsumerCase1Fn"
+              - "Arn"
+          Id: "atmConsumerTarget1"
+
+  PermissionForEventsToInvokeLambda: 
+    Type: AWS::Lambda::Permission
+    Properties: 
+      FunctionName: 
+        Ref: "atmConsumerCase1Fn"
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn: 
+        Fn::GetAtt: 
+          - "EventRuleCase1"
+          - "Arn"
