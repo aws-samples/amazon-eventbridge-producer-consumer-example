@@ -32,7 +32,7 @@ For more blogs and examples, visit [Serverless Land](https://serverlessland.com/
 
 1. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [install the AWS Serverless Application Model CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) on your local machine.
 
-1. Create a new directory, navigate to that directory in a terminal and enter ```https://github.com/aws-samples/amazon-eventbridge-producer-consumer-example```.
+1. Create a new directory, navigate to that directory in a terminal and enter ```git clone https://github.com/aws-samples/amazon-eventbridge-producer-consumer-example```.
 
 1. From the command line, run:
 ```
