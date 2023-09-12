@@ -12,7 +12,7 @@ Resources:
     Properties:
       CodeUri: atmProducer/
       Handler: handler.lambdaHandler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Policies:
         - Statement:
           - Effect: Allow
@@ -25,14 +25,14 @@ Resources:
     Properties:
       CodeUri: atmConsumer/
       Handler: handler.case1Handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
 
   atmConsumerCase2Fn:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: atmConsumer/
       Handler: handler.case2Handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Events:
         Trigger:
           Type: CloudWatchEvent 
@@ -51,7 +51,7 @@ Resources:
     Properties:
       CodeUri: atmConsumer/
       Handler: handler.case3Handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Events:
         Trigger:
           Type: CloudWatchEvent 
