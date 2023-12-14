@@ -1,8 +1,0 @@
-version = 0.1
-[default.deploy.parameters]
-stack_name = "test-app"
-resolve_s3 = true
-s3_prefix = "test-app"
-region = "us-west-2"
-capabilities = "CAPABILITY_IAM"
-image_repositories = []
