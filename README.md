@@ -6,7 +6,7 @@ The example shows how an ATM application at a bank could generate events, and th
 
 Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the [AWS Pricing page](https://aws.amazon.com/pricing/) for details. You are responsible for any AWS costs incurred. No warranty is implied in this example.
 
-For more blogs and examples, visit [Serverless Land](https://serverlessland.com/). 
+For more blogs and examples, visit [Serverless Land](https://serverlessland.com/).
 
 ```bash
 .
@@ -24,7 +24,8 @@ For more blogs and examples, visit [Serverless Land](https://serverlessland.com/
 ## Requirements
 
 * AWS CLI already configured with Administrator permission
-* [NodeJS 12.x installed](https://nodejs.org/en/download/)
+* AWS SAM CLI [latest version](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+* [NodeJS 18.x installed](https://nodejs.org/en/download/)
 
 ## Installation Instructions
 

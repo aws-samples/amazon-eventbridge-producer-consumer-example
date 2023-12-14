@@ -10,6 +10,6 @@
   "author": "James Beswick, AWS Serverless",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.716.0"
+    "aws-sdk": "^2.1518.0"
   }
 }
